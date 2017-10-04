@@ -2,29 +2,31 @@
 
 use JournalMedia\Sample\Http\Controller\TagRiverController;
 
-class TagTest extends PHPUnit_Framework_TestCase {
+class TagTest extends PHPUnit_Framework_TestCase 
+{
+    public function testTagFetchAPI()
+    {
+        $tagController = new TagRiverController();
+        $tagController->setTag("google");
 
-	public function testTagFetchAPI(){
-		$indexController = new TagRiverController();
-		$indexController->setTag("google");
+        $this->assertTrue( is_array($tagController->fetchAPI()) );
 
-		$this->assertTrue( is_array($indexController->fetchAPI()) );
+        $tagController2 = new TagRiverController();
+        $tagController2->setTag("microsoft");
 
-		$indexController2 = new TagRiverController();
-		$indexController2->setTag("microsoft");
+        $this->assertTrue( is_array($tagController2->fetchAPI()) );
+    }
 
-		$this->assertTrue( is_array($indexController2->fetchAPI()) );
-	}
+    public function testTagFetchFile()
+    {
+        $tagController = new TagRiverController();
+        $tagController->setTag("google");
 
-	public function testTagFetchFile(){
-		$indexController = new TagRiverController();
-		$indexController->setTag("google");
+        $this->assertTrue( is_array($tagController->fetchFile()) );
 
-		$this->assertTrue( is_array($indexController->fetchFile()) );
+        $tagController2 = new TagRiverController();
+        $tagController2->setTag("microsoft");
 
-		$indexController2 = new TagRiverController();
-		$indexController2->setTag("microsoft");
-
-		$this->assertTrue( is_array($indexController2->fetchFile()) );
-	}
+        $this->assertTrue( is_array($tagController2->fetchFile()) );
+    }
 }
