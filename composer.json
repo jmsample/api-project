@@ -1,10 +1,10 @@
 {
     "require": {
-        "phpunit/phpunit": "^6.3",
-        "illuminate/container": "^5.5",
-        "league/route": "^3.0",
-        "zendframework/zend-diactoros": "^1.6",
-        "vlucas/phpdotenv": "^2.4"
+        "phpunit/phpunit": "^7.4",
+        "illuminate/container": "^5.7",
+        "league/route": "^3.1",
+        "zendframework/zend-diactoros": "^1.8",
+        "vlucas/phpdotenv": "^2.5"
     },
     "autoload": {
         "psr-4": {
