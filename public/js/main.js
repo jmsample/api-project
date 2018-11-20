@@ -4,7 +4,6 @@
         var path = window.location.pathname;
         var tag = path.substr(path.lastIndexOf('/') + 1);
         getArticles(tag);
-        getArticles(tag);
     });
 
     function getArticles(tag) {
