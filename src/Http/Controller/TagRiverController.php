@@ -22,7 +22,8 @@ class TagRiverController {
         return new HtmlResponse($view);
     }
 
-    public function getArticles(Request $request): Response {
-        return new JsonResponse((new Api)->getArticles());
+    public function getArticles(Request $request, Response $response, array $args): Response {
+        $tag = $args['tag'];
+        return new JsonResponse((new Api)->getArticles($tag));
     }
 }

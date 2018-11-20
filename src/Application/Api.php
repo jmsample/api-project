@@ -19,7 +19,7 @@ class Api {
 
         return [
             'status' => $response->getStatusCode(),
-            'data' => $response->getBody(),
+            'data' => $this->filterPosts($response->getBody()),
         ];
     }
 
@@ -31,6 +31,7 @@ class Api {
 
         if (file_exists($filePath)) {
             $data = json_decode(file_get_contents($filePath), true);
+            $data = $this->filterPosts($data);
         } else {
             $status = 404;
         }
@@ -56,5 +57,16 @@ class Api {
         return $response;
     }
 
+    public function filterPosts($array) {
+        $filtered = [];
+
+        foreach ($array as $element) {
+            if ($element['type'] === 'post') {
+                $filtered[] = $element;
+            }
+        }
+
+        return $filtered;
+    }
 
 }
