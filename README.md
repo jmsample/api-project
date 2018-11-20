@@ -7,7 +7,13 @@ by the publication as well.
 This project uses TheJournal's [project-api](https://github.com/jmsample/api-project) framework.
 
 ## Installation 
-`composer install`
+- `composer install`
+- save a copy of `/.env.example` as `/.env`
+
+## Configuration
+The app can run in "Demo Mode" and "Live" (i.e. production mode).
+
+To switch between the modes, toggle the 'DEMO_MODE' flag in the `.env` file.
 
 ## Routes
 
@@ -39,5 +45,7 @@ Example project URLs:
         |- css/ - CSS files
         |- js/ - JS files 
     |- logs/ - error log files
+    .env (to be copied from .env.example) - local configuration
+    .env.prod - the production's configuration file
     
 

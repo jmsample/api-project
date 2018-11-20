@@ -24,5 +24,7 @@ class ServiceProvider
 
             return $route;
         });
+
+        return;
     }
 }
