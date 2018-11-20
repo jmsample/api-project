@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+
+body {
+    font-family: 'Roboto', Arial;
+    color: #3C3C46;
+}
+
+.container {
+    margin: 0 auto;
+    width: 960px;
+    background-color: blue;
+}
+
+.table {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+}
+
+.table th,
+.table td {
+    border: 1px solid #e0e0e0;
+    padding: 8px 20px;
+}

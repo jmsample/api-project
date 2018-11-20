@@ -15,8 +15,12 @@ class ServiceProvider
         $container->singleton(RouteCollection::class, function ($container) {
             $route = new RouteCollection;
 
-            $route->get("/", $container[PublicationRiverController::class]);
-            $route->get("/{tag}", $container[TagRiverController::class]);
+            $appUrl = getenv('APP_URL');
+
+            $route->get("$appUrl/", [new PublicationRiverController, 'loadView']);
+            $route->get("$appUrl/articles", [new PublicationRiverController, 'getArticles']);
+            $route->get("$appUrl/{tag}", [new TagRiverController, 'loadView']);
+            $route->get("$appUrl/articles/{tag}", [new TagRiverController, 'getArticles']);
 
             return $route;
         });
