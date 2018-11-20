@@ -24,7 +24,7 @@ The available routes are:
 - [GET] `/` - the app's entry point, which renders a general river of 
 articles from a specific publication  
 - [GET] `/:tag` - a view that renders a river for a specific tag
-- [GET]`/articles` - an internal API call that fetches articles
+- [GET] `/articles` - an internal API call that fetches articles
 
 Example project URLs:  
 `http://localhost/the-journal/`  
