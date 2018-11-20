@@ -20,6 +20,17 @@ You need to enable JavaScript to run this app.
         <h1 class="page-title">
             River <span id="page-title-info"></span>
         </h1>
+        <div>
+            <label>
+                Publication
+            </label>
+            <select>
+                <option value="thejournal">TheJournal</option>
+                <option>TheJournal</option>
+                <option>TheJournal</option>
+                <option>TheJournal</option>
+            </select>
+        </div>
         <table class="table" id="articles-table">
             <tr>
                 <th>Headline</th>

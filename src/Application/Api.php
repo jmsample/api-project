@@ -17,27 +17,29 @@ class Api {
         $this->log = $log;
     }
 
-    public function sendRequest($url, $method = 'GET') {
+    public function sendRequest($url, $method = 'GET', $retry = true) {
         $baseUrl = getenv('API_BASE_URL');
         $username = getenv('API_USERNAME');
         $password = getenv('API_PASSWORD');
+        $authBaseUrl = str_replace( 'https://', "https://$username:$password@", $baseUrl);
+
         $data = [];
 
         $client =  new HttpClient();
 
         try {
-            $response = $client->request($method, $baseUrl . $url, [
-                [
-                    'auth' => [$username, $password],
-                    'form_params' => ['username' => $username, 'password' => $password]
-                ]
-            ]);
+            $response = $client->request($method, $authBaseUrl . $url);
             $status = $response->getStatusCode();
-            $data = $response->getBody();
+            $data = json_decode($response->getBody()->getContents(), true)['response']['articles'];
         } catch (\Exception $e) {
             $status = $e->getCode();
             $message = $e->getMessage();
             $this->log->error($status . ' - ' . $message);
+
+            if ($status == 429 && $retry) {
+                sleep(5);
+                return $this->sendRequest($url, $method, false);
+            }
         }
 
         return [
@@ -72,7 +74,7 @@ class Api {
         if ($demoMode) {
             $response = $this->getMockResponse($tag);
         } else {
-            $url = "/sample/$publication" . (!empty($tag) ? "/$tag" : '');
+            $url = "/sample/" . (!empty($tag) ? "tag/$tag" : $publication);
             $response = $this->sendRequest($url);
         }
 
