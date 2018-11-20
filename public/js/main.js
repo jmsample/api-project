@@ -4,24 +4,26 @@
         var path = window.location.pathname;
         var tag = path.substr(path.lastIndexOf('/') + 1);
         getArticles(tag);
+        getArticles(tag);
     });
 
     function getArticles(tag) {
         tag = tag.trim() !== '' ? '/' + tag : '';
         var route = '/articles' + tag;
+        var targetId = '#articles-table';
 
         sendRequest(route).then(function (response) {
             if (response) {
+                clearTable(targetId);
                 var articles = response.data;
                 for (var i = 0; i < articles.length; i++) {
                     var row = constructTableRow(articles[i]);
-                    appendTableRow(row, 'articles-table');
+                    appendTableRow(row, targetId);
                 }
             }
         });
     }
 
-    // send request
     function sendRequest(route, method) {
         method = method || 'GET';
         var baseUrl = document.getElementById('baseUrl').getAttribute('content');
@@ -40,7 +42,7 @@
         });
 
     }
-    // construct table row
+
     function constructTableRow(data) {
         var row = document.createElement('tr');
         var headlineCell = document.createElement('td');
@@ -63,9 +65,19 @@
 
         return row;
     }
-    // append table row
-    function appendTableRow(row, target) {
-        document.getElementById(target).appendChild(row);
+
+    function clearTable(targetId) {
+        targetId = targetId.charAt(0) === '#' ? targetId : '#' + targetId;
+        var rows = document.querySelectorAll(targetId + ' > :not(tbody)');
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].parentNode.removeChild(rows[i]);
+        }
+    }
+
+    function appendTableRow(row, targetId) {
+        targetId = targetId.replace('#', '');
+        document.getElementById(targetId).appendChild(row);
     }
 
 })();
