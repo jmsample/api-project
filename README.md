@@ -14,7 +14,7 @@ This project uses TheJournal's [project-api](https://github.com/jmsample/api-pro
 
 -  `DEMO_MODE` - Toggles between "Demo Mode" (true) and production mode (false)  
 - `APP_URL` - The base folder of the project  
-- `API_BASE_URL` - TheJournal's API base URL  
+- `API_BASE_URL` - The base URL for TheJournal's API
 - `API_USERNAME` - The API's username  
 - `API_PASSWORD` - The API's password  
 
