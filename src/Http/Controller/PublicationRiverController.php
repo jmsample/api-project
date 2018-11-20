@@ -23,6 +23,8 @@ class PublicationRiverController {
     }
 
     public function getArticles(Request $request): Response {
-        return new JsonResponse((new Api)->getArticles());
+        $queryParams = $request->getQueryParams();
+        $publication = !empty($queryParams['publication']) ? $queryParams['publication'] : null;
+        return new JsonResponse((new Api)->getArticles(null, $publication));
     }
 }

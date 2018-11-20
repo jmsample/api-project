@@ -43,6 +43,37 @@ a:focus {
     text-align: center;
 }
 
+/*
+ * Publication selection
+ */
+.publication {
+    margin: 20px auto;
+}
+
+.publication label {
+    font-size: .9em;
+}
+
+.select-wrapper {
+    border: 0;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    width: 120px;
+}
+
+.select-wrapper select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: none;
+    height: 24px;
+    min-width: 120px;
+    padding: 5px 8px;
+}
+
+.select-wrapper select:focus {
+    outline: none;
+}
 
 /*
  * Articles table

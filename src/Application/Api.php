@@ -70,6 +70,7 @@ class Api {
 
     public function getArticles($tag = null, $publication = 'thejournal') {
         $demoMode = filter_var(getenv('DEMO_MODE'), FILTER_VALIDATE_BOOLEAN);
+        $publication = isset($publication) ? $publication : 'thejournal';
 
         if ($demoMode) {
             $response = $this->getMockResponse($tag);
@@ -98,9 +99,6 @@ class Api {
 
     public function formatPublicationName($name) {
         switch (strtolower($name)) {
-            case 'thejournal':
-                $name = 'TheJournal';
-                break;
             case 'thescore':
                 $name = 'TheScore';
                 break;
@@ -109,6 +107,9 @@ class Api {
                 break;
             case 'businessetc':
                 $name = 'BusinessEtc';
+                break;
+            default:
+                $name = 'TheJournal';
                 break;
         }
 

@@ -4,11 +4,14 @@
         var path = window.location.pathname;
         var tag = path.substr(path.lastIndexOf('/') + 1);
         getArticles(tag);
+
+        document.getElementById('publication').addEventListener('change', getArticlesViaEvent);
     });
 
     function getArticles(tag) {
-        tag = tag.trim() !== '' ? '/' + tag : '';
-        var route = '/articles' + tag;
+        tag = typeof tag !== 'undefined' && tag.trim() !== '' ? '/' + tag : '';
+        var publication = getSelectedPublication();
+        var route = '/articles' + tag + publication;
         var targetId = 'articles-table';
 
         sendRequest(route).then(function (response) {
@@ -28,6 +31,10 @@
                 }
             }
         });
+    }
+
+    function getArticlesViaEvent() {
+        getArticles();
     }
 
     function sendRequest(route, method) {
@@ -126,6 +133,17 @@
         return words.split(' ').map(function (word) {
             return word.charAt(0).toUpperCase() + word.substr(1);
         }).join(' ');
+    }
+
+    function getSelectedPublication() {
+        var publication = '';
+        var dropdown = document.getElementById('publication');
+
+        if (dropdown !== null) {
+            publication = '?publication=' + dropdown.options[dropdown.selectedIndex].value;
+        }
+
+        return publication;
     }
 
 })();
