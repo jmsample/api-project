@@ -1,16 +1,51 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+/*
+ * Imports
+ */
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+/*
+ * Base
+ */
 body {
-    font-family: 'Roboto', Arial;
     color: #3C3C46;
+    font-family: 'Roboto', Arial;
 }
 
+a {
+    color: #258ddc;
+    text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:visited,
+a:focus {
+    color: #258ddc;
+    text-decoration: none;
+}
+
+
+/*
+ * Layout
+ */
 .container {
     margin: 0 auto;
+    padding: 20px;
     width: 960px;
-    background-color: blue;
 }
 
+/*
+ * Page Title
+ */
+.page-title {
+    text-align: center;
+}
+
+
+/*
+ * Articles table
+ */
 .table {
     background-color: white;
     border: 1px solid #e0e0e0;
@@ -24,4 +59,8 @@ body {
 .table td {
     border: 1px solid #e0e0e0;
     padding: 8px 20px;
+}
+
+.table th {
+    font-weight: 700;
 }

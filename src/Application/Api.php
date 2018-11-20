@@ -39,7 +39,6 @@ class Api {
         return [
             'status' => $status,
             'data' => $data,
-            'tag' => $tag,
         ];
 
     }
@@ -54,6 +53,9 @@ class Api {
             $response = $this->sendRequest($url);
         }
 
+        $response['publication'] = $this->formatPublicationName($publication);
+        $response['tag'] = $tag;
+
         return $response;
     }
 
@@ -67,6 +69,25 @@ class Api {
         }
 
         return $filtered;
+    }
+
+    public function formatPublicationName($name) {
+        switch (strtolower($name)) {
+            case 'thejournal':
+                $name = 'TheJournal';
+                break;
+            case 'thescore':
+                $name = 'TheScore';
+                break;
+            case 'thedailyedge':
+                $name = 'TheDailyEdge';
+                break;
+            case 'businessetc':
+                $name = 'BusinessEtc';
+                break;
+        }
+
+        return $name;
     }
 
 }

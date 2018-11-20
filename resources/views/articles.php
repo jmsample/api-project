@@ -14,6 +14,9 @@
 You need to enable JavaScript to run this app.
     </noscript>
     <div class="container">
+        <h1 class="page-title">
+            River <span id="page-title-info"></span>
+        </h1>
         <table class="table" id="articles-table">
             <tr>
                 <th>Headline</th>

@@ -10,12 +10,15 @@
     function getArticles(tag) {
         tag = tag.trim() !== '' ? '/' + tag : '';
         var route = '/articles' + tag;
-        var targetId = '#articles-table';
+        var targetId = 'articles-table';
 
         sendRequest(route).then(function (response) {
             if (response) {
+                setPageTitle('page-title-info', response.publication, response.tag);
+
                 clearTable(targetId);
                 var articles = response.data;
+
                 for (var i = 0; i < articles.length; i++) {
                     var row = constructTableRow(articles[i]);
                     appendTableRow(row, targetId);
@@ -53,6 +56,7 @@
 
         headline.innerHTML = data.title;
         headline.href = data.permalink;
+        headline.target = '_blank';
         excerptCell.innerHTML = data.excerpt;
         image.src = data.images.medium.image;
 
@@ -78,6 +82,12 @@
     function appendTableRow(row, targetId) {
         targetId = targetId.replace('#', '');
         document.getElementById(targetId).appendChild(row);
+    }
+
+    function setPageTitle(targetId, publication, tag) {
+        targetId = targetId.replace('#', '');
+        tag = tag === null ? '' : ' - ' + tag;
+        document.getElementById(targetId).innerHTML = ' - ' + publication + tag;
     }
 
 })();
