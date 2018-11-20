@@ -1,0 +1,49 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<style>img {width:100%;}</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+        	{% if demo == "true" %} 
+	        	<div class="alert alert-warning">
+				  Demo Mode: <strong>ON</strong>
+				</div>
+	        {% endif %}	
+	                	
+            <h2>{{title}}</h2>
+        </div>
+    </div> 
+	<div class="row">
+	    <div class="col-md-9">   	
+	    	{% for article in river if article.type == 'post' %} 		
+	        <div class="row mb-2">
+	            <div class="col-md-12">
+	                <div class="card">
+	                    <div class="card-body">
+	                        <div class="row">
+	                            <div class="col-md-3">
+	                                <img src="{{article.images.thumbnail.image}}">
+	                            </div>
+	                            <div class="col-md-9">
+	                                <div class="card-body">
+	                                    <div class="news-content">
+	                                        <a href="#"><h2>{{article.title | raw}}</h2></a>
+	                                        <p>{{article.excerpt | raw}}</p>	                                    
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        {% endfor %}
+	        {% if river is empty %} 
+	        	Oh no! We can’t find the tag you’re looking for.
+	        {% endif %}	        
+	    </div>	   
+	</div>
+</div>
