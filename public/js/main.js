@@ -15,12 +15,16 @@
         sendRequest(route).then(function (response) {
             if (response) {
                 setPageTitle('page-title-info', response.publication, response.tag);
-
                 clearTable(targetId);
                 var articles = response.data;
 
-                for (var i = 0; i < articles.length; i++) {
-                    var row = constructTableRow(articles[i]);
+                if (articles.length) {
+                    for (var i = 0; i < articles.length; i++) {
+                        var row = constructTableRow(articles[i]);
+                        appendTableRow(row, targetId);
+                    }
+                } else {
+                    var row = constructPlaceholderRow();
                     appendTableRow(row, targetId);
                 }
             }
@@ -59,6 +63,7 @@
         headline.target = '_blank';
         excerptCell.innerHTML = data.excerpt;
         image.src = data.images.medium.image;
+        image.classList.add('image');
 
         headlineCell.appendChild(headline);
         imageCell.appendChild(image);
@@ -66,6 +71,19 @@
         row.appendChild(headlineCell);
         row.appendChild(excerptCell);
         row.appendChild(imageCell);
+
+        return row;
+    }
+
+    function constructPlaceholderRow(data) {
+        var row = document.createElement('tr');
+        var cell = document.createElement('td');
+
+        cell.classList.add('placeholder-cell');
+        cell.setAttribute('colspan', '3');
+        cell.innerHTML = 'No articles were found.';
+
+        row.appendChild(cell);
 
         return row;
     }

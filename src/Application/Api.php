@@ -44,7 +44,7 @@ class Api {
     }
 
     public function getArticles($tag = null, $publication = 'thejournal') {
-        $demoMode = getenv('DEMO_MODE');
+        $demoMode = filter_var(getenv('DEMO_MODE'), FILTER_VALIDATE_BOOLEAN);
 
         if ($demoMode) {
             $response = $this->getMockResponse($tag);

@@ -14,6 +14,9 @@
 You need to enable JavaScript to run this app.
     </noscript>
     <div class="container">
+        <?php if (filter_var(getenv('DEMO_MODE'), FILTER_VALIDATE_BOOLEAN)) { ?>
+            <span class="app-mode">Demo Mode</span>
+        <?php } ?>
         <h1 class="page-title">
             River <span id="page-title-info"></span>
         </h1>
