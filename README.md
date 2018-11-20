@@ -10,10 +10,13 @@ This project uses TheJournal's [project-api](https://github.com/jmsample/api-pro
 - `composer install`
 - save a copy of `/.env.example` as `/.env`
 
-## Configuration
-The app can run in "Demo Mode" and "Live" (i.e. production mode).
+## Environment
 
-To switch between the modes, toggle the 'DEMO_MODE' flag in the `.env` file.
+-  `DEMO_MODE` - Toggles between "Demo Mode" (true) and production mode (false)  
+- `APP_URL` - The base folder of the project  
+- `API_BASE_URL` - TheJournal's API base URL  
+- `API_USERNAME` - The API's username  
+- `API_PASSWORD` - The API's password  
 
 ## Routes
 
