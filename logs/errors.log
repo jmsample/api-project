@@ -1,0 +1,1 @@
+[2018-11-20 10:44:54] Api.ERROR: 401 - Client error: `GET https://api.thejournal.ie/v3/sample/thejournal/google` resulted in a `401 Unauthorized` response: Please provide a valid username and password  [] []

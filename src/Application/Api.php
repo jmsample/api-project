@@ -3,23 +3,46 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\Application;
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 use GuzzleHttp\Client as HttpClient;
 
 class Api {
+
+    public function __construct() {
+        $log = new Logger('Api');
+        $log->pushHandler(new StreamHandler(__DIR__ . '/../../logs/errors.log', Logger::WARNING));
+
+        $this->log = $log;
+    }
 
     public function sendRequest($url, $method = 'GET') {
         $baseUrl = getenv('API_BASE_URL');
         $username = getenv('API_USERNAME');
         $password = getenv('API_PASSWORD');
+        $data = [];
 
-        $client =  new HttpClient(['base_uri' => $baseUrl]);
-        $response = $client->request($method, $url, [
-            ['auth' => [$username, $password]]
-        ]);
+        $client =  new HttpClient();
+
+        try {
+            $response = $client->request($method, $baseUrl . $url, [
+                [
+                    'auth' => [$username, $password],
+                    'form_params' => ['username' => $username, 'password' => $password]
+                ]
+            ]);
+            $status = $response->getStatusCode();
+            $data = $response->getBody();
+        } catch (\Exception $e) {
+            $status = $e->getCode();
+            $message = $e->getMessage();
+            $this->log->error($status . ' - ' . $message);
+        }
 
         return [
-            'status' => $response->getStatusCode(),
-            'data' => $this->filterPosts($response->getBody()),
+            'status' => $status,
+            'data' => $this->filterPosts($data),
         ];
     }
 

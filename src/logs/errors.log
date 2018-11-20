@@ -1,0 +1,1 @@
+[2018-11-20 10:34:05] Api.ERROR: 404 - Client error: `GET https://api.thejournal.ie/sample/thejournal/google` resulted in a `404 Not Found` response: <html> <head><title>404 Not Found</title></head> <body bgcolor="white"> <center><h1>404 Not Found</h1></center> <hr> (truncated...)  [] []

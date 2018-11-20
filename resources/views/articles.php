@@ -25,6 +25,7 @@ You need to enable JavaScript to run this app.
                 <th>Headline</th>
                 <th>Excerpt</th>
                 <th>Image</th>
+                <th>Tags</th>
             </tr>
         </table>
     </div>
