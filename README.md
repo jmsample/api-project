@@ -32,23 +32,28 @@ Example project URLs:
 
 ## Folder Structure
 
+```
 -[project-folder]/  
-    |- src/  
-        |- .htaccess - enables accessing the project without 'public/index.php'  
-        |- resources - static files  
-            |- demo-responses - sample JSON files for the demo mode  
-            |- views - the project's views  
-        |- src/ - the app's source files  
-        |- Application/ - classes with the app's core logic  
-        |- Http/ - classes related to routing  
-           |-Controller/ - the app's controllers  
-    |- public/ 
-        |- index.php - the project's entry point  
-        |- .htaccess - enables accessing the project without 'public/index.php'  
-        |- css/ - CSS files  
-        |- js/ - JS files  
-    |- logs/ - error log files  
-    .env (to be copied from .env.example) - local configuration  
-    .env.prod - the production's configuration file  
-    
+    src/ - the app's source files  
+    |----- Application/ - classes with the app's core logic  
+    |----- Http/ - classes related to routing  
+           |----- Controller/ - the app's controllers  
+    |
 
+    resources - static files  
+    |----- demo-responses/ - sample JSON files for the demo mode  
+    |----- views/ - the project's views 
+    | 
+    public/ 
+    |----- index.php - the project's entry point  
+    |----- .htaccess - enables accessing the project without 'public/index.php'  
+    |----- css/ - CSS files  
+    |----- js/ - JS files  
+    |
+    logs/ - error log files  
+    |
+    .env (to be copied from .env.example) - local configuration  
+    .env.prod - the production's configuration file 
+    .htaccess - enables accessing the project without 'public/index.php'  
+ ```
+   
