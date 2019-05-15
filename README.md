@@ -39,7 +39,6 @@ Example project URLs:
     |----- Http/ - classes related to routing  
            |----- Controller/ - the app's controllers  
     |
-
     resources - static files  
     |----- demo-responses/ - sample JSON files for the demo mode  
     |----- views/ - the project's views 
