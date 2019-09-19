@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 $app = require_once __DIR__ . "/../bootstrap.php";
 
-$kernel = $app->make(\JournalMedia\Sample\Http\Kernel::class);
-$emitter = $app->make(\Zend\Diactoros\Response\SapiEmitter::class);
 
-$response = $kernel->handle(
-    \Zend\Diactoros\ServerRequestFactory::fromGlobals()
-);
+$content = $app->createRiver('businessetc');
 
-$emitter->emit($response);
+
+echo "<pre>", print_r($content), "</pre>";
+
+
+
