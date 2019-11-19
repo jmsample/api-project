@@ -69,4 +69,5 @@ class PublicationRiverConfiguration extends ConfigurationAbstract
 
         return $response['response']['articles'];
     }
+
 }

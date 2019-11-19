@@ -62,7 +62,21 @@ abstract class ConfigurationAbstract implements ConfigurationInterface
      */
     public function checkResult($response): array
     {
-        return $this->check($response);
+        return $this->filter($this->check($response));
+    }
+
+    /**
+     * @param array $response
+     * @return array
+     */
+    private function filter(array $response)
+    {
+        foreach ($response as $key => $river) {
+            if (! array_key_exists('type', $river) || $river['type'] != 'post') {
+                unset($response[$key]);
+            }
+        }
+        return $response;
     }
 
     /**

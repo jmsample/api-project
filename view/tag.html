@@ -4,6 +4,6 @@
     {% for river in rivers %}
         <p><h3>{{ river.title }}</h3></p>
         <p><img src="{{ river.images.thumbnail.image }}"></p>
-        <p>{{ river.content | format | striptags | slice(0, 100) }}</p>
+        <p>{{ river.excerpt }}</p>
     {% endfor %}
 {% endblock %}
