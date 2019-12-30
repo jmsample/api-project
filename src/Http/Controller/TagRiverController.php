@@ -6,6 +6,8 @@ namespace JournalMedia\Sample\Http\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use JournalMedia\Sample\Classes\DataProvider;
+use JournalMedia\Sample\Views\RiverView;
 
 class TagRiverController
 {
@@ -14,8 +16,10 @@ class TagRiverController
         ResponseInterface $response,
         array $args
     ): ResponseInterface {
+        $this->dataProvider = new DataProvider();
+        $data = $this->dataProvider->getByTag($args['tag']);
         return new HtmlResponse(
-            sprintf("Display the contents of the river for the tag '%s'", $args['tag'])
+            (new RiverView($data))->HTML
         );
     }
 }
