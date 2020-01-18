@@ -1,9 +1,9 @@
 <?php
 
 
-namespace JournalMedia\Sample\Entity;
+namespace JournalMedia\Sample\Integration\TheJournalIE\Entity;
 
-use JournalMedia\Sample\Entity\Enum\ArticleTypeEnum;
+use JournalMedia\Sample\Integration\TheJournalIE\Entity\Enum\ArticleTypeEnum;
 
 /**
  * Class ArticleEntity
@@ -95,5 +95,13 @@ class ArticleEntity
     {
         $this->type = $type;
         return $this;
+    }
+
+    /**
+     * @param ImageEntity $imageEntity
+     */
+    public function addImage(ImageEntity $imageEntity)
+    {
+        $this->images[] = $imageEntity;
     }
 }

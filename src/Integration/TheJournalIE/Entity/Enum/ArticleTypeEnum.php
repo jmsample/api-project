@@ -1,6 +1,6 @@
 <?php
 
-namespace JournalMedia\Sample\Entity\Enum;
+namespace JournalMedia\Sample\Integration\TheJournalIE\Entity\Enum;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
