@@ -17,6 +17,7 @@ class ArticleParser
      * ArticleParser constructor.
      * @param mixed $rawData
      * @return array
+     * @throws \Exception
      */
     public function parse($rawData)
     {
@@ -25,13 +26,11 @@ class ArticleParser
         try {
             $rawData = json_decode($rawData, true);
         } catch (\Exception $exception) {
-            // TODO: Log here invalid data.
-            return $result;
+            throw new \Exception('Invalid format data.');
         }
 
         if (!isset($rawData['response']['articles'])) {
-            // TODO: Log here invalid data.
-            return $result;
+            throw new \Exception('Invalid format data.');
         }
 
         foreach ($rawData['response']['articles'] as $article) {

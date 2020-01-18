@@ -6,6 +6,12 @@ namespace JournalMedia\Sample\Application;
 use Dotenv\Dotenv;
 use Illuminate\Container\Container;
 
+/**
+ * Class Application
+ * @package JournalMedia\Sample\Application
+ *
+ * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
+ */
 class Application
 {
     /** @var Container */
