@@ -9,7 +9,7 @@ use GuzzleHttp\Client as GuzzleClient;
  * Class AbstractRequester
  * @package JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Requester
  */
-class AbstractRequester
+abstract class AbstractRequester
 {
     /** @var GuzzleClient $guzzleClient */
     protected $guzzleClient;
