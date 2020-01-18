@@ -23,24 +23,28 @@ class ListArticlesByTag implements IListArticlesByTag
     }
 
     /**
+     * List articles by tag name.
+     *
      * @param string $tagName
      * @return ArticleEntity[]
+     * @throws \Exception
      */
     public function listArticlesByTag(string $tagName): string
     {
-        $result = [];
+        $userName = getenv('API_JOURNAL_USERNAME');
+        $password = getenv('API_JOURNAL_PASSWORD');
+        $baseUrl = getenv('API_JOURNAL_BASE_URL');
 
-        $rawResult = $this->guzzleClient->get("https://api.thejournal.ie/v3/sample/tag/{$tagName}",[
+        $rawResult = $this->guzzleClient->get("{$baseUrl}tag/{$tagName}",[
             'auth' => [
-                'codetest',
-                'AQJl5jewY2lZkrJpiT1cCJkj1tLPn64R'
+                $userName,
+                $password
             ]
         ]);
 
         // TODO: Create enum for http status code
         if ($rawResult->getStatusCode() !== 200) {
-            // TODO: Log it.
-            return $result;
+            throw new \Exception('Request error.');
         }
 
         return $rawResult->getBody()
