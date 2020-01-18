@@ -16,7 +16,7 @@ use JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\{
  * Class ListArticlesFactory
  * @package JournalMedia\Sample\Integration\TheJournalIE\Data\Factory
  */
-class ListArticlesFactory implements AbstractDataProviderFactory
+class ListArticlesFactory extends AbstractDataProviderFactory
 {
     public function make(AbstractTypeEnum $type): IListArticles
     {
@@ -28,7 +28,7 @@ class ListArticlesFactory implements AbstractDataProviderFactory
                 return new ListArticlesMock;
                 break;
             case AbstractTypeEnum::REQUESTER:
-                return new ListArticlesRequester(new Client);
+                return new ListArticlesRequester($this->guzzleClient);
                 break;
         }
     }

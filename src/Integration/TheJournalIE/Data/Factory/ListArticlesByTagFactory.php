@@ -17,7 +17,7 @@ use JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Requester\ListArt
  *
  * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
  */
-class ListArticlesByTagFactory implements AbstractDataProviderFactory
+class ListArticlesByTagFactory extends AbstractDataProviderFactory
 {
     public function make(AbstractTypeEnum $type): IListArticlesByTag
     {
@@ -29,7 +29,7 @@ class ListArticlesByTagFactory implements AbstractDataProviderFactory
                 return new ListArticlesMockByTag;
                 break;
             case AbstractTypeEnum::REQUESTER:
-                return new ListArticlesRequesterByTag(new Client);
+                return new ListArticlesRequesterByTag($this->guzzleClient);
                 break;
         }
     }

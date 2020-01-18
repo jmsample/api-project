@@ -3,15 +3,30 @@
 
 namespace JournalMedia\Sample\Integration\TheJournalIE\Data\Factory;
 
-use JournalMedia\Sample\Integration\TheJournalIE\Data\Contract\IListArticles;
-use JournalMedia\Sample\Integration\TheJournalIE\Data\Contract\IListArticlesByTag;
+use GuzzleHttp\Client;
 use JournalMedia\Sample\Integration\TheJournalIE\Data\Factory\Type\AbstractTypeEnum;
 
 /**
- * Interface AbstractDataProviderFactory
+ * AbstractClass AbstractDataProviderFactory
  * @package JournalMedia\Sample\Integration\TheJournalIE\Data\Factory
  */
-interface AbstractDataProviderFactory
+abstract class AbstractDataProviderFactory
 {
-    public function make(AbstractTypeEnum $type);
+    /** @var Client $guzzleClient */
+    protected $guzzleClient;
+
+    /**
+     * GeneralFactory constructor.
+     * @param Client $guzzleClient
+     */
+    public function __construct(Client $guzzleClient = null)
+    {
+        if (empty($guzzleClient)) {
+            $guzzleClient = new Client;
+        }
+        $this->guzzleClient = $guzzleClient;
+    }
+
+
+    public abstract function make(AbstractTypeEnum $type);
 }
