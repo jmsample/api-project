@@ -10,6 +10,8 @@ use JournalMedia\Sample\Integration\TheJournalIE\Entity\{
 
 /**
  * Class ArticleParser
+ *
+ * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
  */
 class ArticleParser
 {

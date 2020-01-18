@@ -8,6 +8,13 @@ use JournalMedia\Sample\Integration\TheJournalIE\{
 };
 use GuzzleHttp\Client as GuzzleClient;
 
+/**
+ * Class ListArticlesByTag responsible for searching the list of articles at the API by tag name.
+ *
+ * @package JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Requester
+ *
+ * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
+ */
 class ListArticlesByTag implements IListArticlesByTag
 {
     /** @var GuzzleClient $guzzleClient */
