@@ -24,6 +24,7 @@ The project is running the Unit Tests always when it is updated. It is using the
 - Factory Method
 - Abtract Factory
 - Strategy
+- Facade
 
 ### .ENV
 
