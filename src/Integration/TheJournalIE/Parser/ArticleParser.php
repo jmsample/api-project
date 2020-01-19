@@ -7,13 +7,14 @@ use JournalMedia\Sample\Integration\TheJournalIE\Entity\{
     Enum\ArticleTypeEnum,
     ImageEntity
 };
+use JournalMedia\Sample\Integration\GeneralContract\IParser;
 
 /**
  * Class ArticleParser
  *
  * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
  */
-class ArticleParser
+class ArticleParser implements IParser
 {
     /**
      * ArticleParser constructor.

@@ -7,8 +7,9 @@ use JournalMedia\Sample\Integration\{TheJournalIE\Data\Factory\GeneralFactory,
     TheJournalIE\Data\Factory\Type\AbstractFactoryEnum,
     TheJournalIE\Data\Factory\Type\AbstractTypeEnum,
     TheJournalIE\Entity\ArticleEntity,
-    TheJournalIE\Parser\ArticleParser
-};
+    TheJournalIE\Parser\ArticleParser,
+    TheJournalIE\Parser\Factory\ParserFactory,
+    TheJournalIE\Parser\Factory\ParserTypeEnum};
 
 /**
  * Class Client
@@ -24,13 +25,19 @@ class Client
     /** @var GeneralFactory $generalFactory */
     private $generalFactory;
 
+    /** @var ParserFactory $parserFactory */
+    private $parserFactory;
+
     /**
      * Client constructor.
+     * @param GeneralFactory|null $generalFactory
+     * @param ParserFactory $parserFactory
      */
-    public function __construct()
+    public function __construct(GeneralFactory $generalFactory = null, ParserFactory $parserFactory = null)
     {
         $this->defineDefaultDataProvider();
-        $this->generalFactory = new GeneralFactory;
+        $this->generalFactory = $generalFactory ?? (new GeneralFactory);
+        $this->parserFactory = $parserFactory ?? (new ParserFactory);
     }
 
     /**
@@ -42,7 +49,7 @@ class Client
      */
     private function defineDefaultDataProvider()
     {
-        if (getenv('DEMO_MODE') === 'true') {
+        if (getenv('DEMO_MODE') === 'true' || getenv('DEMO_MODE') === "1") {
             $this->dataProviderType = AbstractTypeEnum::MOCK();
         } else {
             $this->dataProviderType = AbstractTypeEnum::REQUESTER();
@@ -70,7 +77,7 @@ class Client
         $factory = $this->generalFactory->makeFactory(AbstractFactoryEnum::LIST_ARTICLES());
         $dataProvider = $factory->make($this->dataProviderType);
         $rawResult = $dataProvider->listArticles($publicationName);
-        $parser = new ArticleParser;
+        $parser = $this->parserFactory->make(ParserTypeEnum::PARSER_ARTICLES());
 
         return $parser->parse($rawResult);
     }
@@ -87,7 +94,7 @@ class Client
         $factory = $this->generalFactory->makeFactory(AbstractFactoryEnum::LIST_ARTICLES_BY_TAG());
         $dataProvider = $factory->make($this->dataProviderType);
         $rawResult = $dataProvider->listArticlesByTag($tagName);
-        $parser = new ArticleParser;
+        $parser = $this->parserFactory->make(ParserTypeEnum::PARSER_ARTICLES());
 
         return $parser->parse($rawResult);
     }
