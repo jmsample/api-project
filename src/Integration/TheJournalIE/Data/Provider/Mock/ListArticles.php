@@ -2,8 +2,7 @@
 
 namespace JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Mock;
 
-use JournalMedia\Sample\Integration\TheJournalIE\Data\Contract\IListArticles;
-use JournalMedia\Sample\Integration\TheJournalIE\Entity\ArticleEntity;
+use JournalMedia\Sample\Integration\TheJournalIE\{Data\Contract\IListArticles, Entity\ArticleEntity};
 
 /**
  * Class ListArticles
