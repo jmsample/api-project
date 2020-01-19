@@ -1,7 +1,7 @@
 # api-project - Gabriel Anhaia
 [![CircleCI](https://circleci.com/gh/gabrielanhaia/api-project/tree/master.svg?style=svg)](https://circleci.com/gh/gabrielanhaia/api-project/tree/master)
 
-[PORTUGUESE VERSION](www.google.com)
+[PORTUGUESE VERSION](https://github.com/gabrielanhaia/api-project/blob/master/README_PT.md)
 
 ## Description
 
