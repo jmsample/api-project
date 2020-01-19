@@ -104,7 +104,7 @@ class ArticleParserTest extends TestCase
             }       
         ';
 
-        $parser = new ArticleParser;
+        $parser = new ArticleParser();
         $parsedData = $parser->parse($rawData);
 
         $imageParsedData1 = new ImageEntity(

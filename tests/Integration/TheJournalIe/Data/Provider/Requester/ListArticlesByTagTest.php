@@ -5,6 +5,7 @@ namespace Tests\Integration\TheJournalIe\Data\Provider\Requester;
 
 use GuzzleHttp\Client;
 use JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Requester\ListArticlesByTag as ListArticlesByTagRequester;
+use Mockery;
 use Tests\TestCase;
 
 /**
@@ -34,7 +35,7 @@ class ListArticlesByTagTest extends TestCase
         putenv("API_JOURNAL_PASSWORD={$password}");
         putenv("API_JOURNAL_BASE_URL={$baseUrl}");
 
-        $guzzleClientMock = \Mockery::mock(Client::class);
+        $guzzleClientMock = Mockery::mock(Client::class);
         $guzzleClientMock->expects('get')
             ->once()
             ->with("{$baseUrl}tag/{$tagName}", [
@@ -72,7 +73,7 @@ class ListArticlesByTagTest extends TestCase
 
         $expectedResponse = '{EXPECTED_RESPONSE}';
 
-        $guzzleClientMock = \Mockery::mock(Client::class);
+        $guzzleClientMock = Mockery::mock(Client::class);
         $guzzleClientMock->expects('get')
             ->once()
             ->with("{$baseUrl}tag/{$tagName}", [
