@@ -1,4 +1,4 @@
-# api-project
+# api-project - Gabriel Anhaia
 [![CircleCI](https://circleci.com/gh/gabrielanhaia/api-project/tree/master.svg?style=svg)](https://circleci.com/gh/gabrielanhaia/api-project/tree/master)
 
 [PORTUGUESE VERSION](www.google.com)
@@ -6,6 +6,10 @@
 ## Description
 
 Implementation of the integration with the API from the journal to list articles using the framework shared. The objective was to build a solution able with OO (Object Orientation), following the SOLID principles and applying some design patterns that could make sense.
+
+### CI
+
+The project is running the Unit Tests always when it is updated. It is using the CircleCI.
 
 ### Technologies
 
