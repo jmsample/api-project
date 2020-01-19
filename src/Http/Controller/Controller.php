@@ -11,7 +11,7 @@ use Twig\Environment;
  *
  * @author Gabriel Anhaia <anhaoa.gabriel@gmail.com>
  */
-class Controller
+abstract class Controller
 {
     /** @var Environment $twig Template engine object. */
     private $twig;
