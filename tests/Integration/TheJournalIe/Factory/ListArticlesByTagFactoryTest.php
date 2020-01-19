@@ -3,7 +3,6 @@
 
 namespace Tests\Integration\TheJournalIe\Factory;
 
-
 use GuzzleHttp\Client;
 use JournalMedia\Sample\Integration\TheJournalIE\Data\Factory\ListArticlesByTagFactory;
 use JournalMedia\Sample\Integration\TheJournalIE\Data\Factory\Type\AbstractTypeEnum;

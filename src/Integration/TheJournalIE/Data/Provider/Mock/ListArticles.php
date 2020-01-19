@@ -27,6 +27,9 @@ class ListArticles implements IListArticles
         return $rawResult;
     }
 
+    /**
+     * @return string
+     */
     private function getFilePath(): string
     {
         $filePath = $_SERVER['DOCUMENT_ROOT']

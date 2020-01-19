@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tests\Integration\TheJournalIe\Provider\Requester;
+namespace Tests\Integration\TheJournalIe\Data\Provider\Requester;
 
 use GuzzleHttp\Client;
 use JournalMedia\Sample\Integration\TheJournalIE\Data\Provider\Requester\ListArticlesByTag as ListArticlesByTagRequester;

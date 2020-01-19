@@ -14,7 +14,7 @@ use Zend\Diactoros\Response\HtmlResponse;
  *
  * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
  */
-class PublicationRiverController
+class PublicationRiverController extends Controller
 {
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {

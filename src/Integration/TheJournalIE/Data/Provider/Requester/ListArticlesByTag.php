@@ -42,7 +42,7 @@ class ListArticlesByTag implements IListArticlesByTag
         $password = getenv('API_JOURNAL_PASSWORD');
         $baseUrl = getenv('API_JOURNAL_BASE_URL');
 
-        $rawResult = $this->guzzleClient->get("{$baseUrl}tag/{$tagName}",[
+        $rawResult = $this->guzzleClient->get("{$baseUrl}tag/{$tagName}", [
             'auth' => [
                 $userName,
                 $password
@@ -55,5 +55,6 @@ class ListArticlesByTag implements IListArticlesByTag
         }
 
         return $rawResult->getBody()
-            ->getContents();    }
+            ->getContents();
+    }
 }

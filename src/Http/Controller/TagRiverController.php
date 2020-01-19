@@ -15,7 +15,7 @@ use Zend\Diactoros\Response\HtmlResponse;
  *
  * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
  */
-class TagRiverController
+class TagRiverController extends Controller
 {
     public function __invoke(
         ServerRequestInterface $request,
