@@ -16,16 +16,21 @@ use Zend\Diactoros\Response\HtmlResponse;
  */
 class PublicationRiverController extends Controller
 {
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    /**
+     * @param ServerRequestInterface $request
+     * @return HtmlResponse
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function __invoke(ServerRequestInterface $request): HtmlResponse
     {
         $publicationName = $request->getAttribute('publication_name', 'thejournal');
         $theJournalIeClient = new TheJournalIeIntegrationClient;
         $articles = $theJournalIeClient->listArticles($publicationName);
 
-        dd($articles);
-
-        return new HtmlResponse(
-            sprintf("Demo Mode: %s", getenv('DEMO_MODE') === "true" ? "ON" : "OFF")
-        );
+        return $this->view('articles.twig', [
+            'articles' => $articles
+        ]);
     }
 }

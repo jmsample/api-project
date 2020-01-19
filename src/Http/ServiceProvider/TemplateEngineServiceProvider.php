@@ -21,12 +21,9 @@ class TemplateEngineServiceProvider
             $ds = DIRECTORY_SEPARATOR;
 
             $templatesPath = "{$_SERVER['DOCUMENT_ROOT']}{$ds}..{$ds}views";
-            $cachePath = "{$_SERVER['DOCUMENT_ROOT']}{$ds}..{$ds}cache{$ds}views";
 
             $loader = new FilesystemLoader($templatesPath);
-            $twig = new Environment($loader, [
-                'cache' => $cachePath,
-            ]);
+            $twig = new Environment($loader);
 
             return $twig;
         });

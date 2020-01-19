@@ -4,6 +4,10 @@
 namespace JournalMedia\Sample\Http\Controller;
 
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Zend\Diactoros\Response\HtmlResponse;
 
 /**
  * Class Controller is the base controller of the system.
@@ -30,14 +34,14 @@ abstract class Controller
      *
      * @param string $path Path of the view to be loaded.
      * @param array $data Data to be sent to the view.
-     * @return string
+     * @return HtmlResponse
      *
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    protected function view(string $path, array $data = []): string
+    protected function view(string $path, array $data = []): HtmlResponse
     {
-        return $this->twig->render($path, $data);
+        return new HtmlResponse($this->twig->render($path, $data));
     }
 }

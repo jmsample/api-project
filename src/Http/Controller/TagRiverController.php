@@ -25,10 +25,8 @@ class TagRiverController extends Controller
         $theJournalIeClient = new TheJournalIeIntegrationClient;
         $articles = $theJournalIeClient->listArticlesByTagName($args['tag']);
 
-        dd($articles);
-
-        return new HtmlResponse(
-            sprintf("Display the contents of the river for the tag '%s'", $args['tag'])
-        );
+        return $this->view('articles.twig', [
+            'articles' => $articles
+        ]);
     }
 }
