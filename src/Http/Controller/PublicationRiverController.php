@@ -3,16 +3,34 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\Http\Controller;
 
+use JournalMedia\Sample\Integration\TheJournalIE\Client as TheJournalIeIntegrationClient;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 
-class PublicationRiverController
+/**
+ * Class PublicationRiverController
+ * @package JournalMedia\Sample\Http\Controller
+ *
+ * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
+ */
+class PublicationRiverController extends Controller
 {
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    /**
+     * @param ServerRequestInterface $request
+     * @return HtmlResponse
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function __invoke(ServerRequestInterface $request): HtmlResponse
     {
-        return new HtmlResponse(
-            sprintf("Demo Mode: %s", getenv('DEMO_MODE') === "true" ? "ON" : "OFF")
-        );
+        $publicationName = $request->getAttribute('publication_name', 'thejournal');
+        $theJournalIeClient = new TheJournalIeIntegrationClient;
+        $articles = $theJournalIeClient->listArticles($publicationName);
+
+        return $this->view('articles.twig', [
+            'articles' => $articles
+        ]);
     }
 }

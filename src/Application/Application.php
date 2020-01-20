@@ -5,7 +5,15 @@ namespace JournalMedia\Sample\Application;
 
 use Dotenv\Dotenv;
 use Illuminate\Container\Container;
+use JournalMedia\Sample\Http\ServiceProvider\ServiceProvider;
+use JournalMedia\Sample\Http\ServiceProvider\TemplateEngineServiceProvider;
 
+/**
+ * Class Application
+ * @package JournalMedia\Sample\Application
+ *
+ * @author Gabriel Anhaia <anhaia.gabriel@gmail.com>
+ */
 class Application
 {
     /** @var Container */
@@ -20,7 +28,8 @@ class Application
 
     private function registerServiceProviders(): void
     {
-        (new \JournalMedia\Sample\Http\ServiceProvider)->register($this->container);
+        (new ServiceProvider)->register($this->container);
+        (new TemplateEngineServiceProvider)->register($this->container);
     }
 
     private function loadEnvironmentVariables(): void
