@@ -3,19 +3,26 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\Http\Controller;
 
+use JournalMedia\Sample\Domain\River;
+use JournalMedia\Sample\Domain\StreamFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 
-class TagRiverController
+final class TagRiverController extends BaseController
 {
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
         array $args
-    ): ResponseInterface {
+    ): ResponseInterface
+    {
+        // Load River
+        $river = new River(StreamFactory::createStream());
+        
+        // Response
         return new HtmlResponse(
-            sprintf("Display the contents of the river for the tag '%s'", $args['tag'])
+            sprintf("%s", $this->buildRiverResponse($river->getStream()->loadFromTag($args["tag"])))
         );
     }
 }
