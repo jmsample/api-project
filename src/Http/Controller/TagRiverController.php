@@ -3,19 +3,35 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\Http\Controller;
 
+use JournalMedia\Sample\Repository\RiverFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
 
-class TagRiverController
+class TagRiverController extends RiverBaseController
 {
+    /**
+     * Constructor
+     */
+    public function __construct($riverMode = null, $riverModeParams = [])
+    {
+        parent::setRiverMode($riverMode, $riverModeParams);
+    }
+
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response,
         array $args
-    ): ResponseInterface {
-        return new HtmlResponse(
-            sprintf("Display the contents of the river for the tag '%s'", $args['tag'])
-        );
+    ): ResponseInterface
+    {
+        $path = $request->getUri()->getPath();
+        $slug = substr($path, 1);
+        $riverOfArticles = $this->getPublications($slug);
+        return $this->buildRiverResponse($riverOfArticles);
+    }
+
+    public function getPublications($slug)
+    {
+        $riverRepository = RiverFactory::createRiverRepository($this->riverMode, $this->riverModeParams);
+        return $riverRepository->getPublications($slug);
     }
 }

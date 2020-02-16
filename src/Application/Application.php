@@ -1,4 +1,7 @@
 <?php
+
+
+
 declare(strict_types=1);
 
 namespace JournalMedia\Sample\Application;
@@ -20,7 +23,7 @@ class Application
 
     private function registerServiceProviders(): void
     {
-        (new \JournalMedia\Sample\Http\ServiceProvider)->register($this->container);
+        (new \JournalMedia\Sample\Providers\ServiceProvider)->register($this->container);
     }
 
     private function loadEnvironmentVariables(): void
