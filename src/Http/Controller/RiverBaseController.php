@@ -5,7 +5,6 @@ namespace JournalMedia\Sample\Http\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-
 use JournalMedia\Sample\Repository\RiverFactory;
 
 
@@ -28,6 +27,5 @@ class PublicationRiverController extends RiverBaseController
         $riverRepository = RiverFactory::createRiverRepository($this->riverMode);
         return $riverRepository->getPublications();
     }
-
 
 }
