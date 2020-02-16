@@ -11,10 +11,12 @@ use JournalMedia\Sample\Repository\RiverFactory;
 
 class PublicationRiverController extends RiverBaseController
 {
-
-    public function __construct($riverMode = null)
+    /**
+     * Constructor
+     */
+    public function __construct($riverMode = null, $riverModeParams = [])
     {
-        parent::setRiverMode($riverMode);
+        parent::setRiverMode($riverMode, $riverModeParams);
     }
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
@@ -25,9 +27,8 @@ class PublicationRiverController extends RiverBaseController
 
     public function getPublications()
     {
-        $riverRepository = RiverFactory::createRiverRepository($this->riverMode);
+        $riverRepository = RiverFactory::createRiverRepository($this->riverMode, $this->riverModeParams);
         return $riverRepository->getPublications();
     }
-
 
 }

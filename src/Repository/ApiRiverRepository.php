@@ -7,16 +7,15 @@ use JournalMedia\Sample\Helpers\ApiHelper;
 
 class ApiRiverRepository extends RiverFactory implements RiverRepositoryInterface
 {
-
     private $url;
     private $pass;
     private $userName;
 
-    public function __construct($url, $userName, $pass)
+    public function __construct($params)
     {
-        $this->url = $url;
-        $this->pass = $pass;
-        $this->userName = $userName;
+        $this->url = isset($params['url']) ? $params['url'] : getenv('API_URL');
+        $this->pass = isset($params['pass']) ? $params['pass'] : getenv('API_PASS');
+        $this->userName = isset($params['user']) ? $params['user'] : getenv('API_USERNAME');
     }
 
     public function getPublications(string $slug = null): array

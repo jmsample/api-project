@@ -1,31 +1,41 @@
 <?php
-declare(strict_types=1);
 
 namespace JournalMedia\Sample\Http\Controller;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use JournalMedia\Sample\Repository\RiverFactory;
+use Zend\Diactoros\Response\HtmlResponse;
+use JournalMedia\Sample\Repository\ArticleRepository;
+use JournalMedia\Sample\Helpers\TemplateHelper;
 
-
-class PublicationRiverController extends RiverBaseController
+class RiverBaseController
 {
 
-    public function __construct($riverMode = null)
+    protected $riverMode;
+    protected $riverModeParams;
+
+    public function setRiverMode($riverMode = null, $riverModeParams = [])
     {
-        parent::setRiverMode($riverMode);
+        if (empty($riverMode)) {
+            $this->riverMode = getenv('DEMO_MODE') === "true" ? "STATIC" : "API";
+        } else {
+            $this->riverMode = $riverMode;
+        }
+        $this->riverModeParams = $riverModeParams;
     }
 
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    public function buildRiverResponse(array $riverOfArticles): HtmlResponse
     {
-        $riverOfArticles = $this->getPublications();
-        return $this->buildRiverResponse($riverOfArticles);
+        $articleBlock = file_get_contents("../resources/views/riverBlock.html");
+        $response = '';
+        $articleRepo = new ArticleRepository();
+
+        foreach ($riverOfArticles as $article) {
+            if ($article['type'] == 'post') {
+                $articleData = $articleRepo->transformArticleData($article);
+                $response .= TemplateHelper::renderTemplate($articleBlock, $articleData);
+            }
+        }
+        return $response = new HtmlResponse($response);
     }
 
-    public function getPublications()
-    {
-        $riverRepository = RiverFactory::createRiverRepository($this->riverMode);
-        return $riverRepository->getPublications();
-    }
 
 }
