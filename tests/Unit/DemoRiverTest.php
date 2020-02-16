@@ -2,6 +2,7 @@
 
 namespace Unit;
 
+
 use JournalMedia\Sample\Repository\DemoRiverRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -9,10 +10,13 @@ class DemoRiverTest extends TestCase
 {
     public function setUp()
     {
-        $path = 'resources/demo-responses/';
-        $homeFile = 'thejournal.json';
-        $this->riverDemo = new DemoRiverRepository($path, $homeFile);
+        $params = array(
+            'path' => 'resources/demo-responses/',
+            'defaultFileName' => 'thejournal.json'
+        );
+        $this->riverDemo = new DemoRiverRepository($params);
     }
+
 
     public function testGetRiverDemo()
     {

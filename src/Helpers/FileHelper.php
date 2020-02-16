@@ -4,6 +4,9 @@ namespace JournalMedia\Sample\Helpers;
 
 class FileHelper
 {
+    /**
+     * get file contents
+     */
     public static function getFileContent($fileName)
     {
         try {

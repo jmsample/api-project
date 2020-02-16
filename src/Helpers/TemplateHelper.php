@@ -1,17 +1,21 @@
 <?php
 
 namespace JournalMedia\Sample\Helpers;
-
 /*
- * e.g. you can have some template  $templateString = 'Hi {$who}.
- * and fill it with your data . $data = array("who" => "Nancy");
+ * e.g. you can have some template
+ * $templateString = 'Hi {$who}.
+ * and fill it with your data .
+ * $data = array("who" => "Nancy");
  */
 
 class TemplateHelper
 {
-
+    /**
+     * render template
+     */
     public static function renderTemplate($template, $placeholderArray)
     {
+
         $placeholderKeys = array_keys($placeholderArray);
         $subject = $template;
         foreach ($placeholderKeys as $placeholderKey) {

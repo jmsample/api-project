@@ -3,31 +3,35 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\Http\Controller;
 
+use JournalMedia\Sample\Repository\RiverFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-use JournalMedia\Sample\Repository\RiverFactory;
-
 class TagRiverController extends RiverBaseController
 {
-    public function __construct($riverMode = null)
+    /**
+     * Constructor
+     */
+    public function __construct($riverMode = null, $riverModeParams = [])
     {
-        parent::setRiverMode($riverMode);
+        parent::setRiverMode($riverMode, $riverModeParams);
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        array $args
     ): ResponseInterface
     {
         $path = $request->getUri()->getPath();
-        $riverOfArticles = $this->getPublications($path);
+        $slug = substr($path, 1);
+        $riverOfArticles = $this->getPublications($slug);
         return $this->buildRiverResponse($riverOfArticles);
     }
 
-    public function getPublications($path)
+    public function getPublications($slug)
     {
-
-        $slug = substr($path, 1);
-        $riverRepository = RiverFactory::createRiverRepository($this->riverMode);
+        $riverRepository = RiverFactory::createRiverRepository($this->riverMode, $this->riverModeParams);
         return $riverRepository->getPublications($slug);
     }
 }
