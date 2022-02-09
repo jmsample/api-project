@@ -1,34 +1,33 @@
 <?php
 declare(strict_types=1);
 
-namespace JournalMedia\Sample\Application;
+namespace JournalMedia\Sample\ApiProject\Application;
 
 use Dotenv\Dotenv;
 use Illuminate\Container\Container;
 
-class Application
+final class Application
 {
-    /** @var Container */
-    private $container;
+    private readonly Container $container;
 
     public function __construct()
     {
         $this->container = new Container();
-        $this->registerServiceProviders();
-        $this->loadEnvironmentVariables();
+        self::registerServiceProviders($this->container);
+        self::loadEnvironmentVariables();
     }
 
-    private function registerServiceProviders(): void
+    private static function registerServiceProviders(Container $container): void
     {
-        (new \JournalMedia\Sample\Http\ServiceProvider)->register($this->container);
+        (new \JournalMedia\Sample\ApiProject\Http\ServiceProvider)->register($container);
     }
 
-    private function loadEnvironmentVariables(): void
+    private static function loadEnvironmentVariables(): void
     {
-        (new Dotenv(__DIR__ . "/../../"))->load();
+        (Dotenv::createImmutable(__DIR__ . "/../../"))->load();
     }
 
-    public function make(string $class)
+    public function make(string $class): mixed
     {
         return $this->container->make($class);
     }

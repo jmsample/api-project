@@ -1,14 +1,15 @@
 {
     "require": {
-        "phpunit/phpunit": "^7.4",
-        "illuminate/container": "^5.7",
-        "league/route": "^3.1",
-        "zendframework/zend-diactoros": "^1.8",
-        "vlucas/phpdotenv": "^2.5"
+        "phpunit/phpunit": "^9.5",
+        "illuminate/container": "^9.0",
+        "league/route": "^5.1",
+        "laminas/laminas-diactoros": "^2.8",
+        "vlucas/phpdotenv": "^5.4",
+        "laminas/laminas-httphandlerrunner": "^2.1"
     },
     "autoload": {
         "psr-4": {
-            "JournalMedia\\Sample\\": "src/"
+            "JournalMedia\\Sample\\ApiProject\\": "src/"
         }
     }
 }

@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace JournalMedia\Sample\Http;
+namespace JournalMedia\Sample\ApiProject\Http;
 
 use Illuminate\Container\Container;
-use JournalMedia\Sample\Http\Controller\PublicationRiverController;
-use JournalMedia\Sample\Http\Controller\TagRiverController;
-use League\Route\RouteCollection;
+use JournalMedia\Sample\ApiProject\Http\Controller\PublicationRiverController;
+use JournalMedia\Sample\ApiProject\Http\Controller\TagRiverController;
+use League\Route\Router;
 
-class ServiceProvider
+final class ServiceProvider
 {
     public function register(Container $container): void
     {
-        $container->singleton(RouteCollection::class, function ($container) {
-            $route = new RouteCollection;
+        $container->singleton(Router::class, function ($container) {
+            $router = new Router;
 
-            $route->get("/", $container[PublicationRiverController::class]);
-            $route->get("/{tag}", $container[TagRiverController::class]);
+            $router->get("/", $container[PublicationRiverController::class]);
+            $router->get("/{tag}", $container[TagRiverController::class]);
 
-            return $route;
+            return $router;
         });
     }
 }

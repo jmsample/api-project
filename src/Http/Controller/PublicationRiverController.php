@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace JournalMedia\Sample\Http\Controller;
+namespace JournalMedia\Sample\ApiProject\Http\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
 
-class PublicationRiverController
+final class PublicationRiverController
 {
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
