@@ -1,21 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace JournalMedia\Sample\Http\Controller;
+namespace JournalMedia\Sample\ApiProject\Http\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
 
-class TagRiverController
+final class TagRiverController
 {
     public function __invoke(
         ServerRequestInterface $request,
-        ResponseInterface $response,
         array $args
     ): ResponseInterface {
         return new HtmlResponse(
-            sprintf("Display the contents of the river for the tag '%s'", $args['tag'])
+            "Display the contents of the river for the tag '{$args['tag']}'"
         );
     }
 }

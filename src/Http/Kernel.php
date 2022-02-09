@@ -1,25 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace JournalMedia\Sample\Http;
+namespace JournalMedia\Sample\ApiProject\Http;
 
-use League\Route\RouteCollection;
+use League\Route\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response;
 
-class Kernel
+final class Kernel
 {
-    /** @var RouteCollection */
-    private $routes;
-
-    public function __construct(RouteCollection $routes)
-    {
-        $this->routes = $routes;
-    }
+    public function __construct(
+        private readonly Router $router
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->routes->dispatch($request, new Response);
+        return $this->router->dispatch($request);
     }
 }
