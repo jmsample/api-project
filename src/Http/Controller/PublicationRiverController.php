@@ -4,15 +4,23 @@ declare(strict_types=1);
 namespace JournalMedia\Sample\ApiProject\Http\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Laminas\Diactoros\Response\HtmlResponse;
+use JournalMedia\Sample\ApiProject\Services\ArticleService;
+use JournalMedia\Sample\ApiProject\Helpers\TwigHelper;
 
 final class PublicationRiverController
 {
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    private ArticleService $articleService;
+    private TwigHelper $twig;
+    
+    public function __construct(ArticleService $articleService, TwigHelper $twig)
     {
-        return new HtmlResponse(
-            sprintf("Demo Mode: %s", getenv('DEMO_MODE') === "true" ? "ON" : "OFF")
-        );
+        $this->articleService = $articleService;
+        $this->twig = $twig;
+    }
+    
+    public function __invoke(): ResponseInterface
+    {
+        $articles = $this->articleService->getArticles();
+        return $this->twig->render('articles', ['articles' => $articles]);
     }
 }
