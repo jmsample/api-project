@@ -24,7 +24,7 @@ final class Application
 
     private static function loadEnvironmentVariables(): void
     {
-        (Dotenv::createImmutable(__DIR__ . "/../../"))->load();
+        (Dotenv::createUnsafeImmutable(__DIR__ . "/../../"))->load();
     }
 
     public function make(string $class): mixed
