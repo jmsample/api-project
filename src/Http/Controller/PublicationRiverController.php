@@ -12,7 +12,7 @@ final class PublicationRiverController
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         return new HtmlResponse(
-            sprintf("Demo Mode: %s", getenv('DEMO_MODE') === "true" ? "ON" : "OFF")
+            sprintf("Demo Mode: %s", $_ENV['DEMO_MODE'] === "true" ? "ON" : "OFF")
         );
     }
 }
