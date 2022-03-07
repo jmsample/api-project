@@ -17,18 +17,19 @@ class HelperService
         return $content;
     }
 
-    public function getFormatedArticles($articles)
+    public function getFormatedArticles($articles): string
     {
         $newContent = "";
         foreach ($articles as $article) {
 
             if (($article["type"]) == "post") {
                 $newContent = $newContent . <<<STR
+                <div style="display: flex; gap: 10px">
+                <div><img src='{$article["images"]["medium"]["image"]}' /></div>
                 <div>
                 <h2>{$article['title']}</h2> 
-                <div><img src='{$article["images"]["medium"]["image"]}' /></div>
                 <div> {$article['excerpt']} </div>
-                <div> </div> 
+                </div> 
                 </div>
                 </br>
                 <hr> 

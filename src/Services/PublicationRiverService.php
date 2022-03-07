@@ -10,7 +10,7 @@ class PublicationRiverService
     {
     }
 
-    public function getFormatedArticles()
+    public function getFormatedArticles(): string
     {
         $formatedContent = "";
         if ($_ENV['DEMO_MODE'] === "true") {

@@ -10,7 +10,7 @@ class TagRiverService
     {
     }
 
-    public function getFormatedArticles($tag)
+    public function getFormatedArticles($tag): string
     {
         $formatedContent = "";
         if ($_ENV['DEMO_MODE'] === "true") {
