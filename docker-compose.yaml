@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  api-project:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./:/api-project
+    ports:
+      - 3160:3160
