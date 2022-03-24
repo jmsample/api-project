@@ -7,6 +7,9 @@ use Illuminate\Container\Container;
 use JournalMedia\Sample\ApiProject\Http\Controller\PublicationRiverController;
 use JournalMedia\Sample\ApiProject\Http\Controller\TagRiverController;
 use League\Route\Router;
+use JournalMedia\Sample\ApiProject\Repositories\River\RiverRepositoryInterface;
+use JournalMedia\Sample\ApiProject\Repositories\River\APIRiverRepository;
+use JournalMedia\Sample\ApiProject\Repositories\River\JSONRiverRepository;
 
 final class ServiceProvider
 {
@@ -20,5 +23,10 @@ final class ServiceProvider
 
             return $router;
         });
+
+        $container->bind(
+            RiverRepositoryInterface::class,
+            ( $_ENV['DEMO_MODE'] === "true" ) ? JSONRiverRepository::class : APIRiverRepository::class
+        );
     }
 }
