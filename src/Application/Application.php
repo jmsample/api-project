@@ -13,8 +13,8 @@ final class Application
     public function __construct()
     {
         $this->container = new Container();
-        self::registerServiceProviders($this->container);
         self::loadEnvironmentVariables();
+        self::registerServiceProviders($this->container);
     }
 
     private static function registerServiceProviders(Container $container): void

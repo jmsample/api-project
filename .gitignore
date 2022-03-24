@@ -1,2 +1,5 @@
 .env
 /vendor
+.phpunit.cache/test-results
+.idea/php.xml
+.idea/vcs.xml
