@@ -2,7 +2,7 @@
 
 namespace JournalMedia\Sample\ApiProject\Service;
 
-interface RiverDatasourceInterface
+interface RiverDataSourceInterface
 {
     public function getArticlesByPublication(string $publicationName, array $extraOptions = []);
 

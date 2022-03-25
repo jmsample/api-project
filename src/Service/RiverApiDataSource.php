@@ -5,7 +5,7 @@ namespace JournalMedia\Sample\ApiProject\Service;
 use GuzzleHttp\Exception\GuzzleException;
 use JournalMedia\Sample\ApiProject\Connector\JournalApiConnector;
 
-class RiverApiDataSource implements RiverDatasourceInterface
+class RiverApiDataSource implements RiverDataSourceInterface
 {
 
     private JournalApiConnector $apiConnector;

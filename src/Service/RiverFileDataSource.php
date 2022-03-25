@@ -2,7 +2,7 @@
 
 namespace JournalMedia\Sample\ApiProject\Service;
 
-class RiverFileDataSource implements RiverDatasourceInterface
+class RiverFileDataSource implements RiverDataSourceInterface
 {
     const RESOURCES_EXTENSION = 'json';
 
