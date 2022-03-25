@@ -64,7 +64,7 @@ class ApiConnector implements HttpConnectorInterface
      * @return array
      * @throws GuzzleException
      */
-    #[ArrayShape(['result' => "string"])] public function doGet(string $relativeUrl, array $headers, array $data): array
+    #[ArrayShape(['result' => "string"])] public function doGet(string $relativeUrl, array $headers = [], array $data = []): array
     {
         $queryString = empty($data) ? '' : '?' . http_build_query($data);
         return ['result' => $this->doRequest('GET', $relativeUrl . $queryString, $headers, [])->getBody()
@@ -78,7 +78,7 @@ class ApiConnector implements HttpConnectorInterface
      * @return array
      * @throws GuzzleException
      */
-    #[ArrayShape(['result' => "string"])] public function doPost(string $relativeUrl, array $headers, array $data): array
+    #[ArrayShape(['result' => "string"])] public function doPost(string $relativeUrl, array $headers = [], array $data = []): array
     {
         return ['result' => $this->doRequest('POST', $relativeUrl, $headers, $data)->getBody()
             ->getContents()];
