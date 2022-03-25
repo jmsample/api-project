@@ -39,7 +39,11 @@ final class ServiceProvider
         });
 
         $container->singleton(JournalApiConnector::class, function($container) {
-            return new JournalApiConnector($_ENV['THE_JOURNAL_API_BASE_URL'], $container[Client::class]);
+            $journalApiConnector = new JournalApiConnector($_ENV['THE_JOURNAL_API_BASE_URL'], $container[Client::class]);
+            $journalApiConnector
+                ->setUsername($_ENV['THE_JOURNAL_API_USERNAME'])
+                ->setPassword($_ENV['THE_JOURNAL_API_PASSWORD']);
+            return $journalApiConnector;
         });
 
         $container->singleton(RiverApiDataSource::class, function ($container) {
