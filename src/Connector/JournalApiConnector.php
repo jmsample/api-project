@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use JetBrains\PhpStorm\ArrayShape;
 use Psr\Http\Message\ResponseInterface;
 
-class ApiConnector implements HttpConnectorInterface
+class JournalApiConnector implements HttpConnectorInterface
 {
     private string $baseApiUrl;
     private ClientInterface $client;
@@ -29,9 +29,9 @@ class ApiConnector implements HttpConnectorInterface
 
     /**
      * @param string $username
-     * @return ApiConnector
+     * @return JournalApiConnector
      */
-    public function setUsername(string $username): ApiConnector
+    public function setUsername(string $username): JournalApiConnector
     {
         $this->username = $username;
         return $this;
@@ -39,9 +39,9 @@ class ApiConnector implements HttpConnectorInterface
 
     /**
      * @param string $password
-     * @return ApiConnector
+     * @return JournalApiConnector
      */
-    public function setPassword(string $password): ApiConnector
+    public function setPassword(string $password): JournalApiConnector
     {
         $this->password = $password;
         return $this;
@@ -49,9 +49,9 @@ class ApiConnector implements HttpConnectorInterface
 
     /**
      * @param ClientInterface $client
-     * @return ApiConnector
+     * @return JournalApiConnector
      */
-    public function setClient(ClientInterface $client): ApiConnector
+    public function setClient(ClientInterface $client): JournalApiConnector
     {
         $this->client = $client;
         return $this;
