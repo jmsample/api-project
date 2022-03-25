@@ -63,12 +63,14 @@ class JournalApiConnector implements HttpConnectorInterface
      * @param array $data
      * @return array
      * @throws GuzzleException
+     * @throws \Exception
      */
-    #[ArrayShape(['result' => "string"])] public function doGet(string $relativeUrl, array $headers = [], array $data = []): array
+    #[ArrayShape(['result' => "mixed"])] public function doGet(string $relativeUrl, array $headers = [], array $data = []): array
     {
         $queryString = empty($data) ? '' : '?' . http_build_query($data);
-        return ['result' => $this->doRequest('GET', $relativeUrl . $queryString, $headers, [])->getBody()
-            ->getContents()];
+        $response = json_decode($this->doRequest('GET', $relativeUrl . $queryString, $headers, [])->getBody()
+            ->getContents(), true);
+        return $this->parseResponse($response);
     }
 
     /**
@@ -77,11 +79,13 @@ class JournalApiConnector implements HttpConnectorInterface
      * @param array $data
      * @return array
      * @throws GuzzleException
+     * @throws \Exception
      */
-    #[ArrayShape(['result' => "string"])] public function doPost(string $relativeUrl, array $headers = [], array $data = []): array
+    #[ArrayShape(['result' => "mixed"])] public function doPost(string $relativeUrl, array $headers = [], array $data = []): array
     {
-        return ['result' => $this->doRequest('POST', $relativeUrl, $headers, $data)->getBody()
-            ->getContents()];
+        $response = json_decode($this->doRequest('POST', $relativeUrl, $headers, $data)->getBody()
+            ->getContents());
+        return $this->parseResponse($response);
     }
 
     /**
@@ -107,7 +111,22 @@ class JournalApiConnector implements HttpConnectorInterface
     {
         $credentials = base64_encode($this->username . ':' . $this->password);
         return [
-            'Authorization' => ['Basic '.$credentials]
+            'Authorization' => ['Basic ' . $credentials]
         ];
+    }
+
+    /**
+     * @param mixed $response
+     * @return array
+     * @throws \Exception
+     */
+    private function parseResponse(mixed $response): array
+    {
+        if ($response['status'] ?? false) {
+            return ['result' => $response['response']['articles']];
+        } else {
+            //TODO: throw exception
+            throw new \Exception();
+        }
     }
 }
