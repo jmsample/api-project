@@ -55,7 +55,7 @@ final class ServiceProvider
             return new RiverDataSource(
                 $container[RiverApiDataSource::class],
                 $container[RiverFileDataSource::class],
-                (bool)$_ENV['DEMO_MODE']
+                $_ENV['DEMO_MODE'] === 'true'
             );
         });
     }
