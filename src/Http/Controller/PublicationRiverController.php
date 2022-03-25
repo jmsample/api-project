@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace JournalMedia\Sample\ApiProject\Http\Controller;
 
-use JournalMedia\Sample\ApiProject\Application\Application;
 use JournalMedia\Sample\ApiProject\Service\RiverDataSource;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

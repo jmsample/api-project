@@ -20,7 +20,7 @@ final class TagRiverController
         ServerRequestInterface $request,
         array $args
     ): ResponseInterface {
-        $data = $this->riverDataSource->get()->getArticlesByPublication($request->getAttribute('tag'));
+        $data = $this->riverDataSource->get()->getArticlesByTag($request->getAttribute('tag'));
         print_r($data);
         return new HtmlResponse(
             "Display the contents of the river for the tag '{$args['tag']}'"

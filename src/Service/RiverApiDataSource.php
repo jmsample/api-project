@@ -7,7 +7,7 @@ use JournalMedia\Sample\ApiProject\Connector\JournalApiConnector;
 
 class RiverApiDataSource implements RiverDataSourceInterface
 {
-
+    const TAG_URL_PREFIX = '/tag';
     private JournalApiConnector $apiConnector;
 
     public function __construct(JournalApiConnector $apiConnector)
@@ -29,7 +29,7 @@ class RiverApiDataSource implements RiverDataSourceInterface
      */
     public function getArticlesByTag(string $tagName, array $extraOptions = [])
     {
-        $response = $this->apiConnector->doGet(DIRECTORY_SEPARATOR . $tagName);
+        $response = $this->apiConnector->doGet( self::TAG_URL_PREFIX . "/$tagName");
         return $response['result'] ?? [];
     }
 }
