@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace JournalMedia\Sample\ApiProject\Connector;
 
@@ -84,7 +85,7 @@ class JournalApiConnector implements HttpConnectorInterface
     #[ArrayShape(['result' => "mixed"])] public function doPost(string $relativeUrl, array $headers = [], array $data = []): array
     {
         $response = json_decode($this->doRequest('POST', $relativeUrl, $headers, $data)->getBody()
-            ->getContents());
+            ->getContents(), true);
         return $this->parseResponse($response);
     }
 
@@ -109,6 +110,9 @@ class JournalApiConnector implements HttpConnectorInterface
 
     #[ArrayShape(['Authorization' => "string[]"])] protected function getAuthorization(): array
     {
+        if (empty($this->username) || empty($this->password)) {
+            return [];
+        }
         $credentials = base64_encode($this->username . ':' . $this->password);
         return [
             'Authorization' => ['Basic ' . $credentials]
