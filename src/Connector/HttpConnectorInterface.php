@@ -10,7 +10,7 @@ interface HttpConnectorInterface
      * @param ClientInterface $client
      * @return mixed
      */
-    public function setClient(ClientInterface $client);
+    public function setClient(ClientInterface $client): mixed;
 
     /**
      * @param string $relativeUrl
