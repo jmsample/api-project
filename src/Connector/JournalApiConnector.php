@@ -1,12 +1,12 @@
 <?php
 
-
 namespace JournalMedia\Sample\ApiProject\Connector;
 
-
+use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use JetBrains\PhpStorm\ArrayShape;
+use JournalMedia\Sample\ApiProject\ApiException;
 use Psr\Http\Message\ResponseInterface;
 
 class JournalApiConnector implements HttpConnectorInterface
@@ -63,7 +63,7 @@ class JournalApiConnector implements HttpConnectorInterface
      * @param array $data
      * @return array
      * @throws GuzzleException
-     * @throws \Exception
+     * @throws Exception
      */
     #[ArrayShape(['result' => "mixed"])] public function doGet(string $relativeUrl, array $headers = [], array $data = []): array
     {
@@ -79,7 +79,7 @@ class JournalApiConnector implements HttpConnectorInterface
      * @param array $data
      * @return array
      * @throws GuzzleException
-     * @throws \Exception
+     * @throws Exception
      */
     #[ArrayShape(['result' => "mixed"])] public function doPost(string $relativeUrl, array $headers = [], array $data = []): array
     {
@@ -118,15 +118,14 @@ class JournalApiConnector implements HttpConnectorInterface
     /**
      * @param mixed $response
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    private function parseResponse(mixed $response): array
+    #[ArrayShape(['result' => "mixed"])] private function parseResponse(mixed $response): array
     {
         if ($response['status'] ?? false) {
             return ['result' => $response['response']['articles']];
         } else {
-            //TODO: throw exception
-            throw new \Exception();
+            throw new ApiException('Error getting data from API');
         }
     }
 }
