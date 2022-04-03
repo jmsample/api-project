@@ -13,13 +13,14 @@ final class Application
     public function __construct()
     {
         $this->container = new Container();
-        self::registerServiceProviders($this->container);
         self::loadEnvironmentVariables();
+        self::registerServiceProviders($this->container);
     }
 
     private static function registerServiceProviders(Container $container): void
     {
-        (new \JournalMedia\Sample\ApiProject\Http\ServiceProvider)->register($container);
+        $demoModeIsOn = filter_var($_ENV['DEMO_MODE'], FILTER_VALIDATE_BOOLEAN);
+        ServiceProviderFactory::getServiceProvider($demoModeIsOn)->register($container);
     }
 
     private static function loadEnvironmentVariables(): void
