@@ -5,7 +5,8 @@
         "league/route": "^5.1",
         "laminas/laminas-diactoros": "^2.8",
         "vlucas/phpdotenv": "^5.4",
-        "laminas/laminas-httphandlerrunner": "^2.1"
+        "laminas/laminas-httphandlerrunner": "^2.1",
+        "guzzlehttp/guzzle": "7.4.*"
     },
     "autoload": {
         "psr-4": {
