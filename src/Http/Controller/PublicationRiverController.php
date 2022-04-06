@@ -6,13 +6,23 @@ namespace JournalMedia\Sample\ApiProject\Http\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
+use JournalMedia\Sample\ApiProject\Repository\River\RiverRepositoryInterface;
+use JournalMedia\Sample\ApiProject\Layout\River\PublicationRiverLayout;
 
 final class PublicationRiverController
 {
+    private RiverRepositoryInterface $repo;  
+    private PublicationRiverLayout $layout;
+
+    public function __construct( RiverRepositoryInterface $repo, PublicationRiverLayout $layout )
+    {
+        $this->repo     = $repo;
+        $this->layout   = $layout;
+    }
+
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        return new HtmlResponse(
-            sprintf("Demo Mode: %s", $_ENV['DEMO_MODE'] === "true" ? "ON" : "OFF")
-        );
+        $data = $this->repo->getPublication();
+        return new HtmlResponse( $this->layout->layoutPublication( $data ) );
     }
 }

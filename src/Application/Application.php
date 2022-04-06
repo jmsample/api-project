@@ -12,9 +12,10 @@ final class Application
 
     public function __construct()
     {
+        self::loadEnvironmentVariables();
+     
         $this->container = new Container();
         self::registerServiceProviders($this->container);
-        self::loadEnvironmentVariables();
     }
 
     private static function registerServiceProviders(Container $container): void
